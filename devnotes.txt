@@ -1,0 +1,6 @@
+Some short notes on the project structure:
+./art - Contains the raw, "unexported" art files from Aseprite etc.
+./game - Contains the Godot project
+./game/assets - Contains Godot scenes containing various objects to be placed in the game
+./game/resources - Contains resources used by assets, e.g. sprites, sound files...
+./game/scenes - Contains Godot scenes that are not assets. Basically stuff like levels, the game itself, the main scene, the GUI...
