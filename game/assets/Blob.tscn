@@ -65,12 +65,13 @@ animations = [ {
 radius = 5.0
 
 [node name="Blob" type="KinematicBody2D" groups=[
+"blob",
 "order",
 ]]
 script = ExtResource( 5 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 0, -7 )
+position = Vector2( 0, -8 )
 frames = SubResource( 9 )
 animation = "green"
 

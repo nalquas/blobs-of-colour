@@ -1,32 +1,17 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://resources/sprites/laser_green.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
 [ext_resource path="res://resources/sprites/circle_green.png" type="Texture" id=3]
+[ext_resource path="res://assets/Blob.tscn" type="PackedScene" id=4]
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
 region = Rect2( 0, 0, 128, 129 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 3 )
 region = Rect2( 128, 0, 128, 129 )
-
-[sub_resource type="SpriteFrames" id=7]
-animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ) ],
-"loop": true,
-"name": "default",
-"speed": 10.0
-} ]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 8, 720 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 8, 0, 8, 720 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -36,13 +21,30 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="CircleShape2D" id=4]
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 720 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 720 )
+
+[sub_resource type="SpriteFrames" id=6]
+animations = [ {
+"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+} ]
+
+[sub_resource type="CircleShape2D" id=7]
 radius = 4.0
 
 [node name="Player" type="KinematicBody2D" groups=[
 "order",
 ]]
 script = ExtResource( 2 )
+scene_blob = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -50,11 +52,12 @@ zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 
 [node name="AnimatedSprite_Circle" type="AnimatedSprite" parent="."]
-frames = SubResource( 7 )
+frames = SubResource( 3 )
 
 [node name="AnimatedSprite_Laser" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -356 )
-frames = SubResource( 3 )
+z_index = 4
+frames = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 4 )
+shape = SubResource( 7 )
