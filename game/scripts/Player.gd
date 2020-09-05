@@ -17,7 +17,9 @@ func _ready():
 	$AnimatedSprite_Circle.z_index = min_int
 	
 	# Start animations
+	$AnimatedSprite_Laser.animation = colour
 	$AnimatedSprite_Laser.play()
+	$AnimatedSprite_Circle.animation = colour
 	$AnimatedSprite_Circle.play()
 
 func _physics_process(_delta):
