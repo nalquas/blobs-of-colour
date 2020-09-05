@@ -62,7 +62,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=10]
-radius = 16.0
+radius = 12.0
 
 [node name="Blob" type="KinematicBody2D" groups=[
 "order",
