@@ -20,4 +20,24 @@ format = 1
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 256, 256 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+zoom = Vector2( 0.5, 0.5 )
+smoothing_enabled = true
+
+[node name="Player2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1024, 256 )
+automated = true
+colour = "blue"
+
+[node name="Player3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 256, 464 )
+automated = true
+colour = "orange"
+
+[node name="Player4" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1024, 464 )
+automated = true
+colour = "pink"
 [connection signal="quit" from="IngameMenu" to="." method="_on_IngameMenu_quit"]

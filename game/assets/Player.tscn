@@ -130,15 +130,10 @@ radius = 66.0
 script = ExtResource( 2 )
 scene_blob = ExtResource( 4 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-zoom = Vector2( 0.5, 0.5 )
-smoothing_enabled = true
-
 [node name="AnimatedSprite_Circle" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -0.5 )
 frames = SubResource( 3 )
-animation = "pink"
+animation = "green"
 
 [node name="AnimatedSprite_Laser" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -356 )

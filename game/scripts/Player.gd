@@ -1,11 +1,14 @@
 extends KinematicBody2D
 
+export (bool) var automated = false
 export (float) var speed = 120.0
 export (String) var colour = "green"
 export (PackedScene) var scene_blob
 
 var blobs = []
 var min_int = -9223372036854775808 #-2^63
+
+var last_direction = Vector2(0, 0)
 
 func _ready():
 	# Spawn the first blob
@@ -25,15 +28,25 @@ func _ready():
 func _physics_process(_delta):
 	# Handle player movement
 	var direction = Vector2(0, 0)
-	if Input.is_action_pressed("up"):
-		direction.y -= 1
-	if Input.is_action_pressed("down"):
-		direction.y += 1
-	if Input.is_action_pressed("left"):
-		direction.x -= 1
-	if Input.is_action_pressed("right"):
-		direction.x += 1
-	move_and_slide(direction * speed)
+	if automated:
+		if randf() < 0.95:
+			direction = last_direction
+		else:
+			direction = Vector2(
+				randi()%3-1,
+				randi()%3-1
+			)
+	else:
+		if Input.is_action_pressed("up"):
+			direction.y -= 1
+		if Input.is_action_pressed("down"):
+			direction.y += 1
+		if Input.is_action_pressed("left"):
+			direction.x -= 1
+		if Input.is_action_pressed("right"):
+			direction.x += 1
+	last_direction = direction
+	move_and_slide(direction.normalized() * speed)
 	
 	# Handle blob positions
 	for i in range(0, blobs.size()):
