@@ -9,7 +9,7 @@ var min_int = -9223372036854775808 #-2^63
 
 func _ready():
 	# Spawn the first blob
-	for _i in range(0, 10):
+	for _i in range(0, 3):
 		spawn_blob()
 	
 	# Make the laser circle appear below all other objects
