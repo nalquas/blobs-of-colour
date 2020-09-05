@@ -52,6 +52,7 @@ zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 
 [node name="AnimatedSprite_Circle" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -0.5 )
 frames = SubResource( 3 )
 
 [node name="AnimatedSprite_Laser" type="AnimatedSprite" parent="."]
