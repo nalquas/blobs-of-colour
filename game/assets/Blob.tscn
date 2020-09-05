@@ -77,3 +77,4 @@ animation = "green"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 10 )
+disabled = true
