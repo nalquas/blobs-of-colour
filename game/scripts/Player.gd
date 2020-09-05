@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export (float) var speed = 150.0
+export (float) var speed = 120.0
 export (String) var colour = "green"
 export (PackedScene) var scene_blob
 
