@@ -7,7 +7,10 @@
 [ext_resource path="res://scenes/gui/IngameMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/gui/GameOverlay.tscn" type="PackedScene" id=6]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" groups=[
+"game",
+"pausable",
+]]
 script = ExtResource( 3 )
 
 [node name="GameOverlay" parent="." instance=ExtResource( 6 )]

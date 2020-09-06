@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+func setTimer(t):
+	$LabelTimer.text = String(int(t))
+
 func setColours(g, b, o, p):
 	$PieChart.setColours(g, b, o, p)
 	$PieChart.update()
