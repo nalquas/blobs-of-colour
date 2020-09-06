@@ -3,8 +3,12 @@ extends Node2D
 signal gameover(score)
 signal quit
 
+export (float) var total_game_time = 99.999
+export (int) var score_refresh_framewait = 10
+
 var paused = false
-var time_remaining = 99.999
+var time_remaining = total_game_time
+var score_refresh_counter = 0
 
 func _ready():
 	connect("quit", get_parent(), "_on_Game_quit")
@@ -32,7 +36,7 @@ func reset():
 	$PaintMap.clear()
 	
 	# Reset timer
-	time_remaining = 99.999
+	time_remaining = total_game_time
 	$GameOverlay.setTimer(time_remaining)
 	
 	# Reset gui
@@ -52,31 +56,38 @@ func _process(delta):
 		if Input.is_action_just_pressed("toggle_menu"):
 			$IngameMenu.toggle_visibility()
 		
-		# Handle scoring
-		# total is maximum possible score, assuming all tiles connected using autotile
-		# (imagine the free space visible in single colour tiles as free)
 		var total = float(76*39*2)#float(76*39)#float(80*45)
 		var green = 0
-		var blue = 0
-		var orange = 0
-		var pink = 0
-		for x in range(0, 80):
-			for y in range(0, 45):
-				var index = $PaintMap.get_cell(x, y)
-				var score = 1
-				if $PaintMap.get_cell_autotile_coord(x, y) != Vector2(3, 2):
-					# A tile of colour is worth double if it connects with other tiles of colour using autotile
-					score = 2
-				match index:
-					0:
-						green += score
-					1:
-						blue += score
-					2:
-						orange += score
-					3:
-						pink += score
-		$GameOverlay.setColours(green / total, blue / total, orange / total, pink / total)
+		if score_refresh_counter < score_refresh_framewait and time_remaining - delta > 0:
+			score_refresh_counter += 1
+		else:
+			score_refresh_counter = 0
+			
+			# Handle scoring
+			# total is maximum possible score, assuming all tiles connected using autotile
+			# (imagine the free space visible in single colour tiles as free)
+			# total declared above
+			# green declared above
+			var blue = 0
+			var orange = 0
+			var pink = 0
+			for x in range(0, 80):
+				for y in range(0, 45):
+					var index = $PaintMap.get_cell(x, y)
+					var score = 1
+					if $PaintMap.get_cell_autotile_coord(x, y) != Vector2(3, 2):
+						# A tile of colour is worth double if it connects with other tiles of colour using autotile
+						score = 2
+					match index:
+						0:
+							green += score
+						1:
+							blue += score
+						2:
+							orange += score
+						3:
+							pink += score
+			$GameOverlay.setColours(green / total, blue / total, orange / total, pink / total)
 		
 		# Process time
 		time_remaining -= delta

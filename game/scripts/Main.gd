@@ -19,7 +19,7 @@ func _ready():
 func save_highscore():
 	var file = File.new()
 	file.open("user://highscore.dat", file.WRITE)
-	print("Storing string \"" + String(int(highscore)) + "\"")
+	print("Storing highscore string \"" + String(int(highscore)) + "\"")
 	file.store_string(String(int(highscore)))
 	file.close()
 
@@ -28,7 +28,7 @@ func load_highscore():
 	file.open("user://highscore.dat", file.READ)
 	var content = file.get_as_text()
 	file.close()
-	print("Loaded string \"" + String(content) + "\"")
+	print("Loaded highscore string \"" + String(content) + "\"")
 	highscore = int(content)
 	$MainMenu.set_highscore(highscore)
 
