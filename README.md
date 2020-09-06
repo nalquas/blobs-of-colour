@@ -5,6 +5,8 @@ A game about filling a hall with colour in 99 seconds while competing with 3 opp
 
 Made for [#Minijam 62](https://itch.io/jam/mini-jam-62) (Theme: Colours, Limitation: All animations must use 2 frames).
 
+Made in [Godot 3.2.2](https://godotengine.org/)
+
 ## How to play
 - Your slimes ("blobs") paint tiles they move over.
 - Fill as much of the floor with your colour as possible.
