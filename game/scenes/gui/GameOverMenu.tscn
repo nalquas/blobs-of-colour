@@ -16,8 +16,10 @@ margin_left = -189.0
 margin_top = -35.0
 margin_right = 189.0
 margin_bottom = 35.0
+grow_horizontal = 2
 custom_fonts/font = ExtResource( 2 )
 text = "Game Over"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

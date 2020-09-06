@@ -1,22 +1,36 @@
 extends Node
 
-export (PackedScene) var scene_menu
 export (PackedScene) var scene_game
 export (PackedScene) var scene_gameover_menu
 
 var min_int = -9223372036854775808 #-2^63
+var highscore = 0
 
 func _ready():
-	# Load main menu
-	var new_menu_instance = scene_menu.instance()
-	new_menu_instance.name = "MainMenu"
-	call_deferred("add_child", new_menu_instance)
-	
 	# Load game
 	var new_game_instance = scene_game.instance()
 	new_game_instance.name = "Game"
 	new_game_instance.paused = true
 	call_deferred("add_child", new_game_instance)
+	
+	# Load highscore
+	load_highscore()
+
+func save_highscore():
+	var file = File.new()
+	file.open("user://highscore.dat", file.WRITE)
+	print("Storing string \"" + String(int(highscore)) + "\"")
+	file.store_string(String(int(highscore)))
+	file.close()
+
+func load_highscore():
+	var file = File.new()
+	file.open("user://highscore.dat", file.READ)
+	var content = file.get_as_text()
+	file.close()
+	print("Loaded string \"" + String(content) + "\"")
+	highscore = int(content)
+	$MainMenu.set_highscore(highscore)
 
 func pause_game(state):
 	for node in get_tree().get_nodes_in_group("pausable"):
@@ -37,8 +51,14 @@ func _on_Game_gameover(score):
 	# Load gameover menu
 	var new_gameover_menu_instance = scene_gameover_menu.instance()
 	new_gameover_menu_instance.name = "GameOverMenu"
-	new_gameover_menu_instance.setScore(score, 73.0)
+	new_gameover_menu_instance.setScore(score, highscore)
 	call_deferred("add_child", new_gameover_menu_instance)
+	
+	# New highscore? Overwrite save.
+	if score*100 > highscore:
+		highscore = score*100
+		save_highscore()
+		load_highscore()
 
 func _on_GameOverMenu_finished():
 	# Reset game
