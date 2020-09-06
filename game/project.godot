@@ -16,8 +16,10 @@ _global_script_class_icons={
 [application]
 
 config/name="Blobs of Colour"
+config/description="A game about filling a hall with colour in 99 seconds."
 run/main_scene="res://scenes/game/Main.tscn"
 config/icon="res://icon.png"
+config/windows_native_icon="res://icon.ico"
 
 [display]
 
@@ -75,5 +77,6 @@ fullscreen={
 
 [rendering]
 
+quality/driver/fallback_to_gles2=true
 environment/default_clear_color=Color( 0.356863, 0.431373, 0.882353, 1 )
 environment/default_environment="res://default_env.tres"

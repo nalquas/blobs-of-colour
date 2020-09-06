@@ -10,6 +10,8 @@ var blobs = []
 var min_int = -9223372036854775808 #-2^63
 
 var last_direction = Vector2(0, 0)
+var mouse_input_disabled = true
+var mouse_vector = Vector2(0.0, 0.0)
 
 func _ready():
 	# Spawn the first blob
@@ -26,6 +28,12 @@ func _ready():
 	$AnimatedSprite_Circle.animation = colour
 	$AnimatedSprite_Circle.play()
 
+func _input(event):
+	if not automated and not paused:
+		if event is InputEventMouseMotion:
+			mouse_input_disabled = false
+			mouse_vector = event.position - get_viewport().size / 2.0
+
 func _physics_process(_delta):
 	if not paused:
 		# Handle player movement
@@ -41,12 +49,21 @@ func _physics_process(_delta):
 		else:
 			if Input.is_action_pressed("up"):
 				direction.y -= 1
+				mouse_input_disabled = true
 			if Input.is_action_pressed("down"):
 				direction.y += 1
+				mouse_input_disabled = true
 			if Input.is_action_pressed("left"):
 				direction.x -= 1
+				mouse_input_disabled = true
 			if Input.is_action_pressed("right"):
 				direction.x += 1
+				mouse_input_disabled = true
+			if not mouse_input_disabled:
+				if mouse_vector.length() < 32.0:
+					direction = Vector2(0, 0)
+				else:
+					direction = mouse_vector
 		last_direction = direction
 		move_and_slide(direction.normalized() * speed)
 	

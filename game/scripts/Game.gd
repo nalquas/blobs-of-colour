@@ -19,6 +19,7 @@ func _ready():
 func reset():
 	# Start out with players paused and await unpausing from Main node
 	$Player.paused = true
+	$Player.mouse_input_disabled = true
 	$Player2.paused = true
 	$Player3.paused = true
 	$Player4.paused = true
