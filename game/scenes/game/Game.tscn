@@ -28,7 +28,6 @@ format = 1
 position = Vector2( 256, 256 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 zoom = Vector2( 0.5, 0.5 )
 smoothing_enabled = true
 
@@ -46,4 +45,8 @@ colour = "orange"
 position = Vector2( 1024, 464 )
 automated = true
 colour = "pink"
+
+[node name="OverviewCamera" type="Camera2D" parent="."]
+position = Vector2( 640, 360 )
+current = true
 [connection signal="quit" from="IngameMenu" to="." method="_on_IngameMenu_quit"]

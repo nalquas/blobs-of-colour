@@ -2,7 +2,7 @@ extends CanvasLayer
 
 signal finished
 
-var time_remaining = 5.0
+var time_remaining = 8.0
 
 func _ready():
 	connect("finished", get_parent(), "_on_GameOverMenu_finished")

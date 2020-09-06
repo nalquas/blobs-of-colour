@@ -4,11 +4,15 @@ signal gameover(score)
 signal quit
 
 var paused = false
-var time_remaining = 10.0#99.999
+var time_remaining = 99.999
 
 func _ready():
 	connect("quit", get_parent(), "_on_Game_quit")
 	connect("gameover", get_parent(), "_on_Game_gameover")
+	$Player.paused = true
+	$Player2.paused = true
+	$Player3.paused = true
+	$Player4.paused = true
 
 func _process(delta):
 	# Make objects of the group "order" appear in proper draw order
@@ -69,6 +73,10 @@ func _physics_process(_delta):
 					index = 3
 			$PaintMap.set_cellv(coordinates, index)
 			$PaintMap.update_bitmask_area(coordinates)
+
+func switch_camera_to_player(state):
+	$Player/Camera2D.current = state
+	$OverviewCamera.current = !state
 
 func _on_IngameMenu_quit():
 	emit_signal("quit")
