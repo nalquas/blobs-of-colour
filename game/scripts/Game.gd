@@ -15,7 +15,8 @@ func _process(_delta):
 		object.z_index = object.position.y
 	
 	# Handle scoring
-	# total is maximum possible score, assuming all tiles connected
+	# total is maximum possible score, assuming all tiles connected using autotile
+	# (imagine the free space visible in single colour tiles as free)
 	var total = float(76*39*2)#float(76*39)#float(80*45)
 	var green = 0
 	var blue = 0
