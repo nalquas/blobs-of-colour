@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://fonts/penguin_pix_96px.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/penguin_pix_48px.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/penguin_pix_32px.tres" type="DynamicFont" id=4]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -52,6 +53,23 @@ margin_bottom = 86.0
 custom_fonts/font = ExtResource( 3 )
 text = "Exit Game"
 flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_Copyright" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -210.0
+margin_top = -59.0
+margin_right = 210.0
+margin_bottom = -8.0
+custom_fonts/font = ExtResource( 4 )
+text = "(C) Nalquas, 2020
+Licensed under the MIT license"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

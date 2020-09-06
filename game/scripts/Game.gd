@@ -9,10 +9,38 @@ var time_remaining = 99.999
 func _ready():
 	connect("quit", get_parent(), "_on_Game_quit")
 	connect("gameover", get_parent(), "_on_Game_gameover")
+	
+	reset()
+
+func reset():
+	# Start out with players paused and await unpausing from Main node
 	$Player.paused = true
 	$Player2.paused = true
 	$Player3.paused = true
 	$Player4.paused = true
+	
+	# Reset player positions
+	$Player.position = Vector2(256, 256)
+	$Player2.position = Vector2(1024, 256)
+	$Player3.position = Vector2(256, 464)
+	$Player4.position = Vector2(1024, 464)
+	
+	# Reset to overview camera
+	switch_camera_to_player(false)
+	
+	# Clear PaintMap
+	$PaintMap.clear()
+	
+	# Reset timer
+	time_remaining = 99.999
+	$GameOverlay.setTimer(time_remaining)
+	
+	# Reset gui
+	$GameOverlay.setColours(0.0, 0.0, 0.0, 0.0)
+	$IngameMenu.set_visibility(false)
+	
+	# Pause game itself
+	paused = true
 
 func _process(delta):
 	# Make objects of the group "order" appear in proper draw order
@@ -80,4 +108,3 @@ func switch_camera_to_player(state):
 
 func _on_IngameMenu_quit():
 	emit_signal("quit")
-	queue_free()

@@ -8,6 +8,9 @@ func _ready():
 func toggle_visibility():
 	$VBoxContainer.visible = !$VBoxContainer.visible
 
+func set_visibility(state):
+	$VBoxContainer.visible = state
+
 func _on_Button_Continue_pressed():
 	$VBoxContainer.visible = false
 

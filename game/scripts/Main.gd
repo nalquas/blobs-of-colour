@@ -12,9 +12,6 @@ func _ready():
 	new_menu_instance.name = "MainMenu"
 	call_deferred("add_child", new_menu_instance)
 	
-	load_game()
-
-func load_game():
 	# Load game
 	var new_game_instance = scene_game.instance()
 	new_game_instance.name = "Game"
@@ -30,7 +27,7 @@ func _on_Game_quit():
 	$MainMenu.offset = Vector2(0, 0)
 	
 	# Reload game
-	load_game()
+	$Game.reset()
 
 func _on_Game_gameover(score):
 	# Pause game
@@ -44,11 +41,8 @@ func _on_Game_gameover(score):
 	call_deferred("add_child", new_gameover_menu_instance)
 
 func _on_GameOverMenu_finished():
-	# End game
-	get_tree().get_nodes_in_group("game")[0].queue_free()
-	
-	# Reload game
-	load_game()
+	# Reset game
+	$Game.reset()
 	
 	# Show main menu
 	$MainMenu.offset = Vector2(0, 0)
