@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/gui/PieChart.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts/penguin_pix_32px.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scripts/GameOverlay.gd" type="Script" id=3]
 
 [node name="GameOverlay" type="CanvasLayer"]
+script = ExtResource( 3 )
 
 [node name="PieChart" parent="." instance=ExtResource( 1 )]
 anchor_left = 1.0
@@ -13,3 +16,22 @@ margin_right = 16.0
 margin_bottom = 240.0
 radius = 96
 outline = 4
+
+[node name="LabelScore" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -242.0
+margin_top = 232.0
+margin_right = -8.0
+margin_bottom = 364.0
+grow_horizontal = 0
+custom_fonts/font = ExtResource( 2 )
+text = "green - 0%
+blue - 0%
+orange - 0%
+pink - 0%
+free - 0%"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

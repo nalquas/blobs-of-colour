@@ -15,8 +15,8 @@ func _process(_delta):
 		object.z_index = object.position.y
 	
 	# Handle scoring
-	var total = float(80*45)
-	
+	# total is maximum possible score, assuming all tiles connected
+	var total = float(76*39*2)#float(76*39)#float(80*45)
 	var green = 0
 	var blue = 0
 	var orange = 0
@@ -24,17 +24,20 @@ func _process(_delta):
 	for x in range(0, 80):
 		for y in range(0, 45):
 			var index = $PaintMap.get_cell(x, y)
+			var score = 1
+			if $PaintMap.get_cell_autotile_coord(x, y) != Vector2(3, 2):
+				# A tile of colour is worth double if it connects with other tiles of colour using autotile
+				score = 2
 			match index:
 				0:
-					green += 1
+					green += score
 				1:
-					blue += 1
+					blue += score
 				2:
-					orange += 1
+					orange += score
 				3:
-					pink += 1
-	$GameOverlay/PieChart.setColours(green / total, blue / total, orange / total, pink / total)
-	$GameOverlay/PieChart.update()
+					pink += score
+	$GameOverlay.setColours(green / total, blue / total, orange / total, pink / total)
 
 func _physics_process(_delta):
 	# Handle blobs painting the world (the tilemap "PaintMap")
