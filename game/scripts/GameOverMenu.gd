@@ -20,11 +20,13 @@ func _process(delta):
 		emit_signal("finished")
 		queue_free()
 
-func setScore(score, highscore):
-	if score > highscore:
+func setVictory(state):
+	if state:
 		$Label_Message.text = "Victory"
 	else:
 		$Label_Message.text = "Game Over"
+
+func setScore(score, highscore):
 	$Label_Score.text = "Area filled: " + String(int(score*100)) + "%\nHighscore : " + String(int(highscore)) + "%"
 	if score > highscore:
 		$Label_Score.text += " (Old!)"

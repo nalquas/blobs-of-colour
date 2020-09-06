@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilesets/tileset_paint.tres" type="TileSet" id=2]
@@ -6,12 +6,17 @@
 [ext_resource path="res://scenes/levels/Level_001.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/gui/IngameMenu.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/gui/GameOverlay.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/sawtooth_250ms.wav" type="AudioStream" id=7]
 
 [node name="Game" type="Node2D" groups=[
 "game",
 "pausable",
 ]]
 script = ExtResource( 3 )
+
+[node name="AudioStreamPlayer_Timer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -20.0
 
 [node name="GameOverlay" parent="." instance=ExtResource( 6 )]
 

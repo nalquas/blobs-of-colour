@@ -1,6 +1,6 @@
 extends Node2D
 
-signal gameover(score)
+signal gameover(score, is_biggest_colour)
 signal quit
 
 export (float) var total_game_time = 99.999
@@ -43,6 +43,9 @@ func reset():
 	$GameOverlay.setColours(0.0, 0.0, 0.0, 0.0)
 	$IngameMenu.set_visibility(false)
 	
+	# Stop audio, if playing
+	$AudioStreamPlayer_Timer.stop()
+	
 	# Pause game itself
 	paused = true
 
@@ -58,6 +61,9 @@ func _process(delta):
 		
 		var total = float(76*39*2)#float(76*39)#float(80*45)
 		var green = 0
+		var blue = 0
+		var orange = 0
+		var pink = 0
 		if score_refresh_counter < score_refresh_framewait and time_remaining - delta > 0:
 			score_refresh_counter += 1
 		else:
@@ -66,11 +72,6 @@ func _process(delta):
 			# Handle scoring
 			# total is maximum possible score, assuming all tiles connected using autotile
 			# (imagine the free space visible in single colour tiles as free)
-			# total declared above
-			# green declared above
-			var blue = 0
-			var orange = 0
-			var pink = 0
 			for x in range(0, 80):
 				for y in range(0, 45):
 					var index = $PaintMap.get_cell(x, y)
@@ -90,10 +91,13 @@ func _process(delta):
 			$GameOverlay.setColours(green / total, blue / total, orange / total, pink / total)
 		
 		# Process time
+		var last_time_remaining = time_remaining
 		time_remaining -= delta
 		$GameOverlay.setTimer(time_remaining)
+		if int(time_remaining) < int(last_time_remaining):
+			play_timer_sound(0.5 + 0.5 * pow((2.0 - (time_remaining / total_game_time)), 2))
 		if time_remaining <= 0:
-			emit_signal("gameover", green / total) # Score of player green
+			emit_signal("gameover", green / total, (green > blue and green > orange and green > pink)) # Score of player green
 
 func _physics_process(_delta):
 	if not paused:
@@ -112,6 +116,11 @@ func _physics_process(_delta):
 					index = 3
 			$PaintMap.set_cellv(coordinates, index)
 			$PaintMap.update_bitmask_area(coordinates)
+
+func play_timer_sound(pitch_scale):
+	$AudioStreamPlayer_Timer.stop()
+	$AudioStreamPlayer_Timer.pitch_scale = pitch_scale
+	$AudioStreamPlayer_Timer.play()
 
 func switch_camera_to_player(state):
 	$Player/Camera2D.current = state
