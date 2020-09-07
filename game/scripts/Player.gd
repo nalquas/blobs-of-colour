@@ -30,7 +30,7 @@ func _ready():
 
 func _input(event):
 	if not automated and not paused:
-		if event is InputEventMouseMotion:
+		if event is InputEventMouseMotion or event is InputEventMouseButton:
 			mouse_input_disabled = false
 			mouse_vector = event.position - get_viewport().size / 2.0
 

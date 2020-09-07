@@ -1,9 +1,10 @@
 # Usage:
-# make         - Build everything
+# make         - Build everything, except Android
 # make linux   - Build for Linux/X11
 # make windows - Build for Windows Desktop
 # make mac     - Build for Mac OSX
 # make html5   - Build for HTML5
+# make android - Build for Android (Requires manual setup beforehand)
 
 GAME_NAME = blobs-of-colour
 
@@ -29,3 +30,7 @@ mac: directory
 html5: directory
 	mkdir -p build/html5
 	cd game && godot --export "HTML5" ../build/html5/$(GAME_NAME).html
+
+android: directory
+	mkdir -p build/android
+	cd game && godot --export-debug "Android" ../build/android/$(GAME_NAME).apk

@@ -2,7 +2,7 @@ extends Control
 
 export (int) var radius = 128
 export (int) var outline = 5
-export (float) var step_size = 0.01
+export (float) var step_size = (2*PI) / 360.0#0.01
 
 # Colour values
 var green = Color("#6abe30")

@@ -78,5 +78,6 @@ fullscreen={
 [rendering]
 
 quality/driver/fallback_to_gles2=true
+vram_compression/import_etc=true
 environment/default_clear_color=Color( 0.356863, 0.431373, 0.882353, 1 )
 environment/default_environment="res://default_env.tres"
