@@ -1,7 +1,7 @@
 ================================================================================
 Thank you for downloading:
-Blobs of Colour, V1.0, Windows
-(Last updated 2020-09-06)
+Blobs of Colour, V1.0.1, Windows
+(Last updated 2020-09-11)
 by Niklas 'Nalquas' Freund
 https://nalquas.itch.io
 
