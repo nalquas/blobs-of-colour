@@ -1,0 +1,3 @@
+
+# Override GitHub's faulty language detection
+*.gd linguist-language=GDScript
